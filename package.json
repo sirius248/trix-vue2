@@ -6,8 +6,20 @@
   "scripts": {
     "build": "webpack --progress --watch --optimize-minimize"
   },
-  "author": "Long Nguyen",
-  "license": "ISC",
+  "keywords": [
+     "vue",
+     "vue-component",
+     "trix",
+     "html editor",
+     "text editor"
+   ],
+  "author": "Long Nguyen <long.polyglot@gmail.com>",
+  "repository": {
+     "type": "git",
+     "url": "https://github.com/kimquy/trix-vue2"
+   },
+  "main": "dist/index.js",
+  "license": "MIT",
   "dependencies": {
     "trix": "^0.10.1",
     "vue": "^2.2.6"
