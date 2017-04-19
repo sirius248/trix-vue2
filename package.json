@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --progress --watch"
+    "build": "webpack --progress --watch --optimize-minimize"
   },
   "author": "Long Nguyen",
   "license": "ISC",
   "dependencies": {
-    "trix": "^0.10.1"
+    "trix": "^0.10.1",
+    "vue": "^2.2.6"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",

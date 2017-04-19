@@ -1,20 +1,34 @@
 <template>
   <div class="trixWrapper">
-    <div ref="trixContainer" :id="id"></div>
+    <div ref="trixContainer" :id="id">
+      <trix-editor :input="inputId"></trix-editor>
+    </div>
   </div>
 </template>
 
 <script>
+  import 'trix';
+  import 'trix/dist/trix.css';
+
   export default {
     name: 'trix-vue',
+
     props: {
+      id: {
+        type: String,
+        default: 'trix-container'
+      },
+      inputId: {
+        type: String,
+        default: ''
+      }
     },
+
     data() {
       return {
       }
     },
-    mounted() {
-    },
+
     methods: {
     }
   }
@@ -22,6 +36,5 @@
 
 <style>
   #trix-container {
-    height: 400px;
   }
 </style>
