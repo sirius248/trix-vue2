@@ -21,7 +21,7 @@
                       _editor = node.editor;
                   
                   if((binding.arg
-                    && binding.arg.readonly)
+                    && binding.arg === 'readonly')
                       || binding.value.readonly === true){
                         _node.contentEditable = false;
                         _node.parentNode.classList.add("trix-disabled");
@@ -36,12 +36,17 @@
                   let eventCallback = function(event) {
                         var payload;
                         if(event.attachment){
-                            payload = event.attachment;
-                            if (payload.file) {
+                            if (event.attachment.file) {
+                                  payload = {
+                                    file:event.attachment.file,
+                                    type:event.type,
+                                    target:_editor
+                                  };
+                                  
                                   if(typeof binding.value === 'function'){
-                                      return binding.value(payload, event.type);
+                                      return binding.value(payload);
                                   }else if(typeof (binding.value.events[event.type]) === 'function'){
-                                      return binding.value.events[event.type](payload, event.type);
+                                      return binding.value.events[event.type](payload);
                                   }
                             }
                         }else if(event.type){
@@ -49,11 +54,11 @@
                         }
                   }
                   
-                  if((binding.arg && binding.arg.events)
+                  if((binding.arg && binding.arg === 'events')
                       || binding.value.events instanceof Object){
                       var _events = (binding.arg === 'events')? binding.value : binding.value.events;
                       for(let event of _events){
-                          switch(event){ editor.loadJSON(JSON.parse(localStorage["editorState"]))
+                          switch(event){ 
                               case 'trix-attachment-add':
                               case 'trix-attachment-remove':
                               case 'trix-selection-change':
@@ -67,6 +72,17 @@
                               break;
                           }
                       }
+                  }
+                  
+                  if((binding.arg && binding.arg === 'savestatekey')
+                    || typeof binding.value.savestatekey === 'string'){
+                      var _key = (binding.arg === 'savestatekey')
+                      ? binding.value 
+                      : binding.value.savestatekey;
+                      
+                      _editor.loadJSON(
+                          JSON.parse(window.localStorage[_key])
+                       || '{}');
                   }
             }
         }
