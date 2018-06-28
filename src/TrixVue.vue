@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import { Trix } from 'trix';
-  import 'trix/dist/trix.css';
+  import * as Trix from 'trix'
+  import 'trix/dist/trix.css'
 
   export default {
     name: 'trix-vue',
@@ -42,15 +42,18 @@
                                     type:event.type,
                                     target:_editor
                                   };
-                                  
-                                  if(typeof binding.value === 'function'){
-                                      return binding.value(payload);
-                                  }else if(typeof (binding.value.events[event.type]) === 'function'){
-                                      return binding.value.events[event.type](payload);
-                                  }
                             }
                         }else if(event.type){
-                            ;
+                            payload = {
+                                type:event.type,
+                                target:_editor
+                            };
+                        }
+                        
+                        if(typeof binding.value === 'function'){
+                            return binding.value(payload);
+                        }else if(typeof (binding.value.events[event.type]) === 'function'){
+                            return binding.value.events[event.type](payload);
                         }
                   }
                   
@@ -104,6 +107,7 @@
 
     data() {
       return {
+      
       }
     },
 
